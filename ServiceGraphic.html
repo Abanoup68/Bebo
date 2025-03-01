@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الخدمة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="service-container">
+        <h1 class="service-title">Graphic design</h1>
+        <p class="service-description">
+            نقدم لك خدمة تصميم شعار احترافي يعكس هوية علامتك التجارية، بتصاميم مبتكرة وعصرية.
+        </p>
+        <p class="service-price"><strong>السعر:</strong> حسب المشروع</p>
+        <p class="service-duration"><strong>مدة التنفيذ:</strong> حسب المشروع </p>
+        <h2>عينات من الأعمال</h2>
+<div class="samples">
+    <img src="gra5.jpg" alt="نموذج 1" onclick="openModal(this)">
+    <img src="gra6.jpg" alt="نموذج 2" onclick="openModal(this)">
+    <img src="gra4.jpg" alt="نموذج 3" onclick="openModal(this)">
+  
+</div>
+
+<!-- النافذة المنبثقة لعرض الصورة -->
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+</div>
+      
+      <!-- زر طلب الخدمة -->
+<button class="order-button" onclick="openOrderModal()">طلب الخدمة</button>
+
+<!-- النافذة المنبثقة لاختيار الموظف -->
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeOrderModal()">&times;</span>
+        <h2>اختر الموظف لتنفيذ الخدمة</h2>
+        <select id="employeeSelect">
+            <option value="" disabled selected>اختر الموظف</option>
+            <option value="1">الموظف 1</option>
+            <option value="2">الموظف 2</option>
+            <option value="3">الموظف 3</option>
+        </select>
+        <br><br>
+        <button class="confirm-button" onclick="confirmOrder()">تأكيد الطلب</button>
+    </div>
+</div>
+
+      
+      
+    </div>
+
+
+</body>
+</html>
+
+
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    text-align: center;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.service-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.service-title {
+    color: #333;
+}
+
+.service-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.service-price, .service-duration {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.samples {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.samples img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.order-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #ff6600;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.order-button:hover {
+    background: #cc5500;
+}
+
+
+
+/* تصميم النافذة المنبثقة */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.modal-content {
+    max-width: 80%;
+    max-height: 80%;
+    margin-top: 5%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+    animation: zoomIn 0.3s ease-in-out;
+}
+
+/* زر الإغلاق */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* تأثير تكبير عند فتح الصورة */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* نافذة اختيار الموظف */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.modal-content {
+    background: white;
+    width: 300px;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: black;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+select {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.confirm-button {
+    background: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-button:hover {
+    background: #cc5500;
+}
+
+
+
+
+
+</style>
+
+
+
+
+<script>
+
+function openModal(imgElement) {
+    var modal = document.getElementById("imageModal");
+    var modalImg = document.getElementById("modalImg");
+
+    modal.style.display = "block";
+    modalImg.src = imgElement.src;
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function openOrderModal() {
+    document.getElementById("orderModal").style.display = "block";
+}
+
+function closeOrderModal() {
+    document.getElementById("orderModal").style.display = "none";
+}
+
+function confirmOrder() {
+    var employee = document.getElementById("employeeSelect").value;
+
+    if (employee) {
+        alert("تم إرسال الطلب إلى الموظف رقم " + employee);
+        closeOrderModal();
+    } else {
+        alert("يرجى اختيار موظف قبل تأكيد الطلب.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function confirmOrder() {
+    var employee = document.getElementById("employeeSelect").value;
+
+    // قائمة أرقام الموظفين على واتساب (استبدل بالأرقام الفعلية)
+    var employees = {
+        "1": "01273898277",  // رقم الموظف 1
+        "2": "+201273898277",  // رقم الموظف 2
+        "3": "+20 1273898277"   // رقم الموظف 3
+    };
+
+    if (employee) {
+        var phoneNumber = employees[employee];  // جلب رقم واتساب للموظف
+        var serviceName = "تصميم شعار احترافي"; // اسم الخدمة
+        var price = "50$"; // السعر
+        var duration = "3 أيام"; // مدة التنفيذ
+
+        // إنشاء نص الرسالة
+        var message = `مرحبًا، أرغب في طلب خدمة: *${serviceName}*\nالسعر: ${price}\nمدة التنفيذ: ${duration}\nيرجى تأكيد الطلب.`;
+        
+        // تحويل النص إلى رابط واتساب
+        var whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        // توجيه المستخدم إلى واتساب
+        window.location.href = whatsappUrl;
+
+        closeOrderModal(); // إغلاق النافذة بعد التوجيه
+    } else {
+        alert("يرجى اختيار موظف قبل تأكيد الطلب.");
+    }
+}
+
+
+
+
+
+
+
+</script>
