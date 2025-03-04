@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاتورة الطلب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .invoice-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .invoice-details {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .print-btn {
+            background: #007bff;
+        }
+        .print-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invoice-container">
+        <h2>فاتورة الطلب</h2>
+        
+        <div class="invoice-details">
+            <p><strong>رقم الطلب : </strong> <span id="orderID">123456</span></p>
+            <p><strong>اسم العميل : </strong> <span id="clientName">محمد علي</span></p>
+            <p><strong>تاريخ الطلب : </strong> <span id="orderDate">2025-03-01</span></p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>الخدمة</th>
+                    <th>السعر</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="serviceName">تصميم موقع</td>
+                    <td id="servicePrice">150$</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="total">المبلغ الإجمالي: <span id="totalAmount">150$</span></p>
+
+        <div class="buttons">
+            <button class="print-btn" onclick="window.print()">🖨️ طباعة الفاتورة</button>
+            <button onclick="sendInvoice()">✉️ إرسال الفاتورة بالبريد</button>
+        </div>
+    </div>
+
+    <!-- نموذج Formspree --><!-- نموذج Formsubmit -->
+<form id="emailForm" action="https://formsubmit.co/abanoup654321@gmail.com" method="POST" style="display: none;">
+    <!-- تعطيل الكابتشا إذا رغبت -->  
+        <input type="hidden" name="_replyto" id="clientEmail">
+        <input type="hidden" name="_subject" value="📄 فاتورة طلبك">
+        <input type="hidden" name="message" id="invoiceMessage">
+        <button type="submit" id="submitForm">إرسال</button>
+    </form>
+
+    <script>
+        function sendInvoice() {
+            let clientEmail = prompt("📧 أدخل البريد الإلكتروني للعميل:");
+            if (!clientEmail) return;
+
+            let orderID = document.getElementById("orderID").textContent;
+            let clientName = document.getElementById("clientName").textContent;
+            let orderDate = document.getElementById("orderDate").textContent;
+            let serviceName = document.getElementById("serviceName").textContent;
+            let servicePrice = document.getElementById("servicePrice").textContent;
+            let totalAmount = document.getElementById("totalAmount").textContent;
+
+            let message = `
+                <h3>مرحبًا ${clientName},</h3>
+                <p>شكرًا لاستخدام خدماتنا. إليك تفاصيل فاتورة طلبك:</p>
+                <ul>
+                    <li><strong>رقم الطلب:</strong> ${orderID}</li>
+                    <li><strong>تاريخ الطلب:</strong> ${orderDate}</li>
+                    <li><strong>الخدمة:</strong> ${serviceName}</li>
+                    <li><strong>السعر:</strong> ${servicePrice}</li>
+                    <li><strong>المبلغ الإجمالي:</strong> ${totalAmount}</li>
+                </ul>
+                <p>نتمنى لك يومًا سعيدًا! 😊</p>
+            `;
+
+            document.getElementById("clientEmail").value = clientEmail;
+            document.getElementById("invoiceMessage").value = message;
+            document.getElementById("emailForm").submit();
+
+            alert("✅ تم إرسال الفاتورة إلى " + clientEmail);
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!--
+
+كيف يعمل هذا الكود؟
+يعرض الفاتورة بتفاصيل الطلب (رقم الطلب، اسم العميل، الخدمة، السعر، الإجمالي).
+زر طباعة الفاتورة يجعل المستخدم يطبعها مباشرةً.
+زر إرسال الفاتورة بالبريد يطلب من المستخدم إدخال بريد العميل ثم يرسل الفاتورة إليه باستخدام Formspree.
+الرسالة تحتوي على جميع تفاصيل الفاتورة بتنسيق HTML في البريد الإلكتروني.
+
+كيفية تشغيله على موقعك؟
+1️⃣ استبدل YOUR_FORMSPREE_ID بمعرف النموذج من Formspree.
+2️⃣ افتح الملف invoice.html في المتصفح.
+3️⃣ جرب طباعة الفاتورة أو إرسالها عبر البريد الإلكتروني.
+4️⃣ تحقق من وصول البريد الإلكتروني إلى صندوق الوارد للعميل.
+
+
+
+-->
